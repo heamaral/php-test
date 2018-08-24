@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  php-test:
+    build: .
+    restart: always
+    ports:
+      - 8000:80

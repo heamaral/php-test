@@ -1,0 +1,8 @@
+apis:
+  - name: php-test
+    attributes:
+      upstream_url: http://php-test.default.svc.cluster.local
+      uris: ["/api/php-test/v1"]
+      strip_uri: true
+    plugins:
+      - name: cors
