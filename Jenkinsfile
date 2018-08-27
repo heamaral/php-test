@@ -25,7 +25,7 @@ node {
      * Variables
      */
 
-    final IMAGE_NAME = "ciatechrancher/${PROJECT_NAME}"
+    final IMAGE_NAME = "registryrancher.ciatech.com.br/${PROJECT_NAME}"
     final IMAGE_TAG = env.BRANCH_NAME.replace("/", "-")
     final IMAGE_REF = "${IMAGE_NAME}:${IMAGE_TAG}"
 
