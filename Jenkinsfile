@@ -5,13 +5,15 @@ node {
      */
 
     final DOCKER_CREDENTIALS = "dockerhub"
-    final DOCKER_REGISTRY    = "https://index.docker.io/v1/"
+    final DOCKER_REGISTRY    = "https://registryrancher.ciatech.com.br/"
 
     /**
      * Tags and branches
      */
 
     final ENVIRONMENT_DEVELOPMENT = /(development)/
+    final ENVIRONMENT_QA = /(qa)/
+    final ENVIRONMENT_PRODUCTION = /(master)/
 
     /**
      * Settings
@@ -37,7 +39,7 @@ node {
      * Deployment urls
      */
 
-    final DEPLOY_URL_DEVELOPMENT = "https://deploy-development.rancher.ciatech.com.br/deploy/${DEPLOY_KEY_DEVELOPMENT}?image=${IMAGE_REF}"
+    final DEPLOY_URL_DEVELOPMENT = "https://deploy-backend.gen.ciatech.tk/deploy/${DEPLOY_KEY_DEVELOPMENT}?image=${IMAGE_REF}"
 
     /**
      * Steps
@@ -70,7 +72,9 @@ node {
         def shouldPush = false
 
         if (
-            env.BRANCH_NAME ==~ ENVIRONMENT_DEVELOPMENT
+            env.BRANCH_NAME ==~ ENVIRONMENT_DEVELOPMENT ||
+            env.BRANCH_NAME ==~ ENVIRONMENT_QA ||
+            env.BRANCH_NAME ==~ ENVIRONMENT_PRODUCTION
         ) {
             shouldPush = true
         }
@@ -89,7 +93,7 @@ node {
 
     stage("Deploy image") {
 
-        if (env.BRANCH_NAME ==~ ENVIRONMENT_DEVELOPMENT) {
+        /*if (env.BRANCH_NAME ==~ ENVIRONMENT_DEVELOPMENT) {
 
             sh "curl --fail ${DEPLOY_URL_DEVELOPMENT}"
 
@@ -101,7 +105,8 @@ node {
 
             sh "curl --fail ${DEPLOY_URL_PRODUCTION}"
 
-        }
+        }*/
+        sh "echo Deploy! && ls -lha"
 
     }
 
